@@ -1,7 +1,7 @@
 package com.example.todolistapp.data.repository
 
 import com.example.todolistapp.data.models.Todo
-import com.example.todolist.data.database.dao.TodoDao
+import com.example.todolistapp.data.database.dao.TodoDao
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
@@ -9,11 +9,7 @@ class TodoRepository @Inject constructor(private val todoDao: TodoDao) {
     private val executorService = Executors.newFixedThreadPool(4)
 
     fun getAllTodo(): List<Todo> {
-        var data: List<Todo> = ArrayList()
-        executorService.execute {
-            data = todoDao.getAllTodos()
-        }
-        return data
+        return todoDao.getAllTodos()
     }
 
     fun insertTodo(todo: Todo) {

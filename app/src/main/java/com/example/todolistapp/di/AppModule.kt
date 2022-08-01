@@ -3,7 +3,7 @@ package com.example.todolistapp.di
 import android.app.Application
 import androidx.room.Room
 import com.example.todolistapp.data.database.TodoDataBase
-import com.example.todolist.data.database.dao.TodoDao
+import com.example.todolistapp.data.database.dao.TodoDao
 import com.example.todolistapp.data.repository.TodoRepository
 import dagger.Module
 import dagger.Provides
@@ -22,7 +22,7 @@ object AppModule {
             app,
             TodoDataBase::class.java,
             "todoDatabase"
-        ).build()
+        ).allowMainThreadQueries().build()
     }
 
     @Provides

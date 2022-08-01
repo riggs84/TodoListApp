@@ -1,4 +1,4 @@
-package com.example.todolist.data.database.dao
+package com.example.todolistapp.data.database.dao
 
 import androidx.room.*
 import com.example.todolistapp.data.models.Todo

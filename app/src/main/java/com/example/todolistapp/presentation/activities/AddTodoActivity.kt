@@ -1,5 +1,6 @@
 package com.example.todolistapp.presentation.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -21,8 +22,10 @@ class AddTodoActivity : AppCompatActivity() {
         binding.todoSaveBtn.setOnClickListener {
             val title = binding.todoTitle.text.toString()
             val description = binding.todoDescription.text.toString()
+            val intent = Intent(this, MainActivity::class.java)
 
             viewModel.insertTodo(Todo(0, title, description, false))
+            startActivity(intent)
         }
     }
 }
