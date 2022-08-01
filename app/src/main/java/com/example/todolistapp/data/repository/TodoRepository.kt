@@ -9,7 +9,11 @@ class TodoRepository @Inject constructor(private val todoDao: TodoDao) {
     private val executorService = Executors.newFixedThreadPool(4)
 
     fun getAllTodo(): List<Todo> {
-        return todoDao.getAllTodos()
+        var data: List<Todo> = ArrayList()
+        executorService.execute {
+            data = todoDao.getAllTodos()
+        }
+        return data
     }
 
     fun insertTodo(todo: Todo) {
