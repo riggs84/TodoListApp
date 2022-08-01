@@ -2,15 +2,18 @@ package com.example.todolistapp.presentation.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todolistapp.presentation.viewModel.TodoViewModel
 import com.example.todolistapp.presentation.adapters.TodoRecyclerViewAdapter
 import com.example.todolistapp.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    lateinit var viewModel: TodoViewModel
+    private val viewModel: TodoViewModel by viewModels()
     private val adapter = TodoRecyclerViewAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,8 +25,6 @@ class MainActivity : AppCompatActivity() {
             recyclerView.layoutManager = LinearLayoutManager(applicationContext)
             recyclerView.adapter = adapter
         }
-
-        viewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
 
         viewModel.liveData.observe(this) {
             adapter.updateTodoList(it)
