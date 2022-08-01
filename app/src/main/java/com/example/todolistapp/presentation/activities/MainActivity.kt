@@ -1,9 +1,9 @@
 package com.example.todolistapp.presentation.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todolistapp.presentation.viewModel.TodoViewModel
 import com.example.todolistapp.presentation.adapters.TodoRecyclerViewAdapter
@@ -24,8 +24,12 @@ class MainActivity : AppCompatActivity() {
         with(binding) {
             recyclerView.layoutManager = LinearLayoutManager(applicationContext)
             recyclerView.adapter = adapter
-        }
+            floatingActionButton.setOnClickListener {
+                val intent = Intent(applicationContext, AddTodoActivity::class.java)
+                startActivity(intent)
+            }
 
+        }
         viewModel.liveData.observe(this) {
             adapter.updateTodoList(it)
         }
