@@ -2,12 +2,9 @@ package com.example.todolistapp.presentation.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
-import com.example.todolistapp.R
 import com.example.todolistapp.data.models.Todo
 import com.example.todolistapp.databinding.ActivityAddTodoBinding
-import com.example.todolistapp.databinding.ActivityMainBinding
 import com.example.todolistapp.presentation.viewModel.TodoViewModel
 
 class AddTodoActivity : AppCompatActivity() {
