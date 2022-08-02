@@ -3,14 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true"
     android:layout_marginHorizontal="10dp"
     android:layout_marginVertical="20dp"
     android:background="#E9E3FA"
     android:minHeight="70dp"
     app:cardCornerRadius="4dp"
+    app:contentPadding="8dp"
     app:cardElevation="4dp">
 
     <LinearLayout
@@ -48,17 +46,21 @@
             android:layout_marginHorizontal="5dp"
             android:background="@android:color/transparent"
             app:icon="@android:drawable/ic_menu_delete"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
             app:iconTintMode="multiply" />
 
         <Button
             android:id="@+id/edit_btn"
             android:layout_width="wrap_content"
-            android:gravity="center"
-            android:background="@android:color/transparent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
-            app:iconTintMode="multiply"
-            app:icon="@android:drawable/ic_menu_edit" />
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            app:icon="@android:drawable/ic_menu_edit"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconTintMode="multiply" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
