@@ -1,7 +1,7 @@
 package com.example.todolistapp.data.repository
 
 import com.example.todolistapp.data.models.Todo
-import com.example.todolist.data.database.dao.TodoDao
+import com.example.todolistapp.data.database.dao.TodoDao
 import java.util.concurrent.Executors
 import javax.inject.Inject
 

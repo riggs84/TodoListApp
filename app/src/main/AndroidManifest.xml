@@ -15,6 +15,9 @@
         android:theme="@style/Theme.TodoListApp"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.activities.AddTodoActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.activities.MainActivity"
             android:exported="true">
             <intent-filter>

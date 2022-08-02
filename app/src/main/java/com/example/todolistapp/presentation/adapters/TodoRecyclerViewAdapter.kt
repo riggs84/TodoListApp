@@ -1,5 +1,6 @@
 package com.example.todolistapp.presentation.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +15,9 @@ class TodoRecyclerViewAdapter : RecyclerView.Adapter<TodoRecyclerViewAdapter.Tod
 
     class TodoViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         private val binding = TodoItemBinding.bind(item)
-        fun bind(todo: Todo) = with(binding) {
-            todoDescription.text = todo.description
-            todoTitle.text = todo.name
+        fun bind(todo: Todo) {
+            binding.todoDescription.text = todo.description
+            binding.todoTitle.text = todo.name
         }
     }
 
@@ -34,6 +35,7 @@ class TodoRecyclerViewAdapter : RecyclerView.Adapter<TodoRecyclerViewAdapter.Tod
     }
 
     fun updateTodoList(data: List<Todo>) {
+        Log.d("azaza", data.toString())
         todos = data
         notifyDataSetChanged()
     }
