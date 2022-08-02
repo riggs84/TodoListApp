@@ -7,16 +7,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todolistapp.data.models.Todo
 import com.example.todolistapp.R
 import com.example.todolistapp.databinding.TodoItemBinding
+import com.example.todolistapp.presentation.interfaces.OnDeleteBtnClick
 
-class TodoRecyclerViewAdapter : RecyclerView.Adapter<TodoRecyclerViewAdapter.TodoViewHolder>() {
+class TodoRecyclerViewAdapter(private val onDeleteClickListener: OnDeleteBtnClick) :
+    RecyclerView.Adapter<TodoRecyclerViewAdapter.TodoViewHolder>() {
 
     private var todos: List<Todo> = ArrayList()
 
-    class TodoViewHolder(item: View) : RecyclerView.ViewHolder(item) {
+    class TodoViewHolder(item: View, private val onDeleteClickHandler: OnDeleteBtnClick) : RecyclerView.ViewHolder(item) {
         private val binding = TodoItemBinding.bind(item)
         fun bind(todo: Todo) {
             binding.todoDescription.text = todo.description
             binding.todoTitle.text = todo.name
+            binding.deleteBtn.setOnClickListener {
+                onDeleteClickHandler.onClick(todo)
+            }
         }
     }
 
@@ -26,7 +31,7 @@ class TodoRecyclerViewAdapter : RecyclerView.Adapter<TodoRecyclerViewAdapter.Tod
             parent,
             false
         )
-        return TodoViewHolder(view)
+        return TodoViewHolder(view, onDeleteClickListener)
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {

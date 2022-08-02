@@ -5,16 +5,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.todolistapp.data.models.Todo
 import com.example.todolistapp.presentation.viewModel.TodoViewModel
 import com.example.todolistapp.presentation.adapters.TodoRecyclerViewAdapter
 import com.example.todolistapp.databinding.ActivityMainBinding
+import com.example.todolistapp.presentation.interfaces.OnDeleteBtnClick
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnDeleteBtnClick {
     lateinit var binding: ActivityMainBinding
     private val viewModel: TodoViewModel by viewModels()
-    private val adapter = TodoRecyclerViewAdapter()
+    private val adapter = TodoRecyclerViewAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +33,12 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        viewModel.liveData.value?.let { adapter.updateTodoList(it) }
         viewModel.liveData.observe(this) {
             adapter.updateTodoList(it)
         }
+    }
+
+    override fun onClick(todo: Todo) {
+        viewModel.deleteTodo(todo)
     }
 }
