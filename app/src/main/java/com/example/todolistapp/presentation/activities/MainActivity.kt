@@ -9,11 +9,11 @@ import com.example.todolistapp.data.models.Todo
 import com.example.todolistapp.presentation.viewModel.TodoViewModel
 import com.example.todolistapp.presentation.adapters.TodoRecyclerViewAdapter
 import com.example.todolistapp.databinding.ActivityMainBinding
-import com.example.todolistapp.presentation.interfaces.OnDeleteBtnClick
+import com.example.todolistapp.presentation.interfaces.OnDeleteBtnClickHandler
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), OnDeleteBtnClick {
+class MainActivity : AppCompatActivity(), OnDeleteBtnClickHandler {
     lateinit var binding: ActivityMainBinding
     private val viewModel: TodoViewModel by viewModels()
     private val adapter = TodoRecyclerViewAdapter(this)

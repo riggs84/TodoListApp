@@ -2,7 +2,7 @@ package com.example.todolistapp.presentation.interfaces
 
 import com.example.todolistapp.data.models.Todo
 
-interface OnDeleteBtnClick {
+interface OnDeleteBtnClickHandler {
 
     fun onClick(todo: Todo)
 }

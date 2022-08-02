@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todolistapp.data.models.Todo
 import com.example.todolistapp.R
 import com.example.todolistapp.databinding.TodoItemBinding
-import com.example.todolistapp.presentation.interfaces.OnDeleteBtnClick
+import com.example.todolistapp.presentation.interfaces.OnDeleteBtnClickHandler
 
-class TodoRecyclerViewAdapter(private val onDeleteClickListener: OnDeleteBtnClick) :
+class TodoRecyclerViewAdapter(private val onDeleteClickListener: OnDeleteBtnClickHandler) :
     RecyclerView.Adapter<TodoRecyclerViewAdapter.TodoViewHolder>() {
 
     private var todos: List<Todo> = ArrayList()
 
-    class TodoViewHolder(item: View, private val onDeleteClickHandler: OnDeleteBtnClick) : RecyclerView.ViewHolder(item) {
+    class TodoViewHolder(item: View, private val onDeleteClickHandler: OnDeleteBtnClickHandler) : RecyclerView.ViewHolder(item) {
         private val binding = TodoItemBinding.bind(item)
         fun bind(todo: Todo) {
             binding.todoDescription.text = todo.description
