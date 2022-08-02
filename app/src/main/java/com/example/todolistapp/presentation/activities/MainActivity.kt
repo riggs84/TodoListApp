@@ -3,7 +3,6 @@ package com.example.todolistapp.presentation.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todolistapp.presentation.viewModel.TodoViewModel
@@ -31,8 +30,9 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
+        viewModel.liveData.value?.let { adapter.updateTodoList(it) }
         viewModel.liveData.observe(this) {
-            Log.d("azaza", "observer")
             adapter.updateTodoList(it)
         }
     }

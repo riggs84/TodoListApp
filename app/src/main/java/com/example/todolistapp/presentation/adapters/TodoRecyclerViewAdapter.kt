@@ -1,6 +1,5 @@
 package com.example.todolistapp.presentation.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,11 @@ class TodoRecyclerViewAdapter : RecyclerView.Adapter<TodoRecyclerViewAdapter.Tod
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.todo_item, parent)
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.todo_item,
+            parent,
+            false
+        )
         return TodoViewHolder(view)
     }
 
@@ -35,7 +38,6 @@ class TodoRecyclerViewAdapter : RecyclerView.Adapter<TodoRecyclerViewAdapter.Tod
     }
 
     fun updateTodoList(data: List<Todo>) {
-        Log.d("azaza", data.toString())
         todos = data
         notifyDataSetChanged()
     }
