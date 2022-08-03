@@ -3,19 +3,25 @@ package com.example.todolistapp.presentation.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.todolistapp.data.models.Todo
 import com.example.todolistapp.presentation.viewModel.TodoViewModel
 import com.example.todolistapp.presentation.adapters.TodoRecyclerViewAdapter
 import com.example.todolistapp.databinding.ActivityMainBinding
+import com.example.todolistapp.presentation.interfaces.OnDeleteBtnClickHandler
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private val viewModel: TodoViewModel by viewModels()
-    private val adapter = TodoRecyclerViewAdapter()
+    private val adapter = TodoRecyclerViewAdapter(
+        object : OnDeleteBtnClickHandler {
+            override fun onClick(todo: Todo) {
+                viewModel.deleteTodo(todo)
+            }
+        })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +37,8 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
         viewModel.liveData.observe(this) {
-            Log.d("azaza", "observer")
             adapter.updateTodoList(it)
         }
     }

@@ -14,6 +14,10 @@ class TodoViewModel @Inject constructor(private val repository: TodoRepository) 
     private var mutableLiveData = MutableLiveData<List<Todo>>()
     val liveData: LiveData<List<Todo>> = mutableLiveData
 
+    init {
+        updateLiveData()
+    }
+
     fun getAllTodos() {
         if (mutableLiveData.value == null || mutableLiveData.value!!.isEmpty()) {
             updateLiveData()

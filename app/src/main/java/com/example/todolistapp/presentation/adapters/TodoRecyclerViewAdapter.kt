@@ -1,6 +1,5 @@
 package com.example.todolistapp.presentation.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,22 +7,33 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todolistapp.data.models.Todo
 import com.example.todolistapp.R
 import com.example.todolistapp.databinding.TodoItemBinding
+import com.example.todolistapp.presentation.interfaces.OnDeleteBtnClickHandler
 
-class TodoRecyclerViewAdapter : RecyclerView.Adapter<TodoRecyclerViewAdapter.TodoViewHolder>() {
+class TodoRecyclerViewAdapter(
+    private val onDeleteClickListener: OnDeleteBtnClickHandler
+) : RecyclerView.Adapter<TodoRecyclerViewAdapter.TodoViewHolder>() {
 
     private var todos: List<Todo> = ArrayList()
 
-    class TodoViewHolder(item: View) : RecyclerView.ViewHolder(item) {
+    class TodoViewHolder(item: View, private val onDeleteClickHandler: OnDeleteBtnClickHandler) :
+        RecyclerView.ViewHolder(item) {
         private val binding = TodoItemBinding.bind(item)
         fun bind(todo: Todo) {
             binding.todoDescription.text = todo.description
             binding.todoTitle.text = todo.name
+            binding.deleteBtn.setOnClickListener {
+                onDeleteClickHandler.onClick(todo)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.todo_item, parent)
-        return TodoViewHolder(view)
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.todo_item,
+            parent,
+            false
+        )
+        return TodoViewHolder(view, onDeleteClickListener)
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
@@ -35,7 +45,6 @@ class TodoRecyclerViewAdapter : RecyclerView.Adapter<TodoRecyclerViewAdapter.Tod
     }
 
     fun updateTodoList(data: List<Todo>) {
-        Log.d("azaza", data.toString())
         todos = data
         notifyDataSetChanged()
     }
