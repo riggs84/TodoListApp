@@ -13,10 +13,15 @@ import com.example.todolistapp.presentation.interfaces.OnDeleteBtnClickHandler
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), OnDeleteBtnClickHandler {
+class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private val viewModel: TodoViewModel by viewModels()
-    private val adapter = TodoRecyclerViewAdapter(this)
+    private val adapter = TodoRecyclerViewAdapter(
+        object : OnDeleteBtnClickHandler {
+            override fun onClick(todo: Todo) {
+                viewModel.deleteTodo(todo)
+            }
+        })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +41,5 @@ class MainActivity : AppCompatActivity(), OnDeleteBtnClickHandler {
         viewModel.liveData.observe(this) {
             adapter.updateTodoList(it)
         }
-    }
-
-    override fun onClick(todo: Todo) {
-        viewModel.deleteTodo(todo)
     }
 }
